@@ -1,0 +1,44 @@
+.table{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 4px;
+}
+  
+.row{
+    display: flex;
+    gap: 4px;
+}
+  
+.element{
+    display: flex;
+    padding: 10px;
+    border: 1px solid black;
+    align-items: center;
+    justify-content: center;
+    width: 30px;
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.element.undefined{
+    border: 1px solid white;
+}
+
+.element.s:hover{
+    background-color: red;
+}
+
+.element.p:hover{
+    background-color: green;
+}
+
+.element.d:hover{
+    background-color: blue;
+}
+
+.element.f:hover{
+    background-color: yellow;
+}

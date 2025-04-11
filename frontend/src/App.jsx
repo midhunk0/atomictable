@@ -1,10 +1,12 @@
 import React from "react";
 import "./App.css";
+import Table from "./components/table/Table";
 
 function App() {
     return (
-        <div>
-            <h1>just a periodic table</h1>
+        <div className="app">
+            <h1>periodic table</h1>
+            <Table/>
         </div>
     )
 }
