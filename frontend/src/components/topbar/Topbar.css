@@ -1,0 +1,25 @@
+.topbar{
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 20px;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.logo{
+    width: 39px;
+    aspect-ratio: 1;
+    cursor: pointer;
+}
+
+.topbar h1{
+    cursor: pointer;
+    margin-right: auto;
+}
+
+.icon{
+    width: 24px;   
+    aspect-ratio: 1;
+    cursor: pointer;
+}

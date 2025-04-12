@@ -4,41 +4,123 @@
     align-items: center;
     justify-content: center;
     gap: 4px;
+    height: calc(100vh - 79px - 40px);
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    padding: 20px;
+    overflow-x: scroll;
+    overflow-y: scroll;
+    max-width: 100%;
 }
   
-.row{
+.table-row{
     display: flex;
     gap: 4px;
 }
   
-.element{
+.table-element{
     display: flex;
     padding: 10px;
-    border: 1px solid black;
+    border: 1px solid var(--text-color);
     align-items: center;
     justify-content: center;
-    width: 30px;
+    width: 36px;
     aspect-ratio: 1/1;
     border-radius: 4px;
     cursor: pointer;
+    position: relative;
+    overflow: hidden;
 }
 
-.element.undefined{
-    border: 1px solid white;
+.table-f{
+    display: flex;
+    align-items: center;
+    padding: 6px;
+    width: 44px;
+    aspect-ratio: 1;
+    border: 1px solid var(--text-color);
+    border-radius: 4px;
+    position: relative;
+    cursor: pointer;
 }
 
-.element.s:hover{
+.table-element.hover.lanthanide{
     background-color: red;
 }
 
-.element.p:hover{
+.table-element.hover.actinide{
     background-color: green;
 }
 
-.element.d:hover{
+.table-element-number, .table-f-number{
+    font-size: 10px;
+    position: absolute;
+    top: 4px;
+    left: 4px;
+}
+
+.table-element-symbol{
+    font-weight: bold;
+    font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+}
+
+.table-element.undefined{
+    border: 1px solid var(--bg-color);
+    cursor: auto;
+}
+
+.table-element:hover span {
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 2px;
+}
+
+.table-element-symbol, .table-element-number {
+    z-index: 1;
+}
+  
+.table-element::before {
+    content: "";
+    position: absolute;
+    top: 4px;
+    right: 4px;
+    width: 4px;
+    height: 4px;
+    border-radius: 50%;
+    transition: all 0.6s ease-in-out, border-radius 0.4s ease-in-out;
+    z-index: 0;
+    opacity: 0.5;
+}
+  
+.table-element.s::before {
+    background-color: red;
+}
+
+.table-element.p::before {
+    background-color: green;
+}
+
+.table-element.d::before {
     background-color: blue;
 }
 
-.element.f:hover{
+.table-element.f::before {
     background-color: yellow;
+}  
+
+.table-element:hover::before {
+    scale: 35;
+}
+
+.table-element.hover::before {
+    scale: 35;
+}
+
+@media(max-width: 1147px){
+    .table{
+        align-items: flex-start;  
+        justify-content: flex-start;  
+    }
 }

@@ -1,0 +1,148 @@
+.element{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var(--bg-color);
+    color: var(--text-color);
+}
+
+.element-header{
+    display: flex;
+    justify-content: space-between;
+    width: calc(100% - 40px);
+}
+
+.element-header button{
+    background-color: var(--bg-color);
+    color: var(--text-color);
+    border: none;
+    outline: none;
+    font-size: 24px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.element-header img{
+    width: 24px;
+    aspect-ratio: 1;
+}
+
+.element-container {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    max-width: 1600px;
+    flex-wrap: wrap;
+    height: calc(100vh - 79px - 40px - 40px);
+}
+
+.element-name {
+    font-size: 32px;
+}
+
+model-viewer {
+    flex: 1;
+    width: 100%;
+    height: max-content;
+    min-width: 300px;
+    max-width: 500px;
+    aspect-ratio: 1;
+    outline: none;
+    border-radius: 20px;
+    border: 1px solid var(--text-color);
+}
+
+.element-image-section{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 20px;
+}
+  
+.element-image-section img {
+    width: 100%;
+    max-width: 300px;
+    height: auto;
+    border-radius: 20px;
+    object-fit: contain;
+}
+  
+.info-panel {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    overflow-y: auto;
+    max-height: calc(100vh - 79px - 40px - 56px);
+}
+  
+.element-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
+}
+  
+.info-card {
+    backdrop-filter: var(--blur);
+    padding: 20px;
+    border-radius: 20px;
+    border: 1px solid var(--text-color);
+}
+  
+.info-card h2 {
+    margin-bottom: 20px;
+}
+  
+.info-card p {
+    font-size: 16px;
+    line-height: 1.5;
+}
+  
+.element-summary {
+    padding: 20px;
+    border-left: 4px solid var(--text-color);
+}
+  
+@media screen and (max-width: 720px) {
+    .element-container {
+        flex-direction: column;
+        padding: 20px;
+        height: auto;
+    }
+
+    model-viewer{
+        max-width: 100%;
+        max-height: 300px;
+        outline: none;
+    }
+  
+    .info-panel {
+        max-height: none;
+    }
+}
+
+@media screen and (max-width: 600px) {
+    .element-container {
+        height: auto;
+    }
+
+    .info-panel {
+        height: auto;
+        max-height: none;
+        overflow-y: visible;
+    }
+
+    .element-sections {
+        grid-template-columns: 1fr;
+    }
+
+    .info-card {
+        padding: 20px;
+    }
+
+    .element-summary {
+        padding: 20px;
+    }
+}
