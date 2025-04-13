@@ -23,3 +23,7 @@
     aspect-ratio: 1;
     cursor: pointer;
 }
+
+.app.night .logo{
+    content: url("/logo-white.png");
+}

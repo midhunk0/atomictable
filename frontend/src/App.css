@@ -1,18 +1,17 @@
 .app.day {
-    --bg-color: white;
-    --text-color: black;
+    --bg-color: #F4F7ED;
+    --text-color: #1E2022;
+    --red: #C94C4C;
+    --blue: #3A7CA5;
+    --green: #6A994E;
+    --yellow: #E3B505; 
 }
   
 .app.night {
-    --bg-color: black;
-    --text-color: white;
+    --bg-color: #1E2022;
+    --text-color: #F4F7ED;
+    --red: #FF6B6B;
+    --blue: #4D96FF;
+    --green: #6EEB83;
+    --yellow: #F2C94C; 
 }
-
-.app.night img{
-    filter: invert();
-}
-  
-.app {
-    transition: background-color 0.3s, color 0.3s;
-}
-  

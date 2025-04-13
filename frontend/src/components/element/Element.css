@@ -24,9 +24,17 @@
     gap: 4px;
 }
 
-.element-header img{
+.prev, .next{
     width: 24px;
     aspect-ratio: 1;
+}
+
+.app.night .prev{
+    content: url("/prev-white.png");
+}
+
+.app.night .next{
+    content: url("/next-white.png");
 }
 
 .element-container {
@@ -35,7 +43,7 @@
     padding: 20px;
     max-width: 1600px;
     flex-wrap: wrap;
-    height: calc(100vh - 79px - 40px - 40px);
+    height: calc(100vh - 159px);
 }
 
 .element-name {
@@ -69,13 +77,13 @@ model-viewer {
     object-fit: contain;
 }
   
-.info-panel {
+.element-info-panel {
     flex: 2;
     display: flex;
     flex-direction: column;
     gap: 20px;
     overflow-y: auto;
-    max-height: calc(100vh - 79px - 40px - 56px);
+    max-height: calc(100vh - 175px);
 }
   
 .element-sections {
@@ -84,18 +92,18 @@ model-viewer {
     gap: 20px;
 }
   
-.info-card {
+.element-info-card {
     backdrop-filter: var(--blur);
     padding: 20px;
     border-radius: 20px;
     border: 1px solid var(--text-color);
 }
   
-.info-card h2 {
+.element-info-card h2 {
     margin-bottom: 20px;
 }
   
-.info-card p {
+.element-info-card p {
     font-size: 16px;
     line-height: 1.5;
 }
@@ -118,7 +126,7 @@ model-viewer {
         outline: none;
     }
   
-    .info-panel {
+    .element-info-panel {
         max-height: none;
     }
 }
@@ -128,7 +136,7 @@ model-viewer {
         height: auto;
     }
 
-    .info-panel {
+    .element-info-panel {
         height: auto;
         max-height: none;
         overflow-y: visible;
@@ -138,7 +146,7 @@ model-viewer {
         grid-template-columns: 1fr;
     }
 
-    .info-card {
+    .element-info-card {
         padding: 20px;
     }
 

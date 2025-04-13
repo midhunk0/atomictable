@@ -18,6 +18,7 @@ export default function Loader(){
                 src="/logo.png"
                 alt="logo"
                 layoutId="logo"
+                className="logo"
                 initial={{ opacity: 0, y: 50 }}
                 animate={{ opacity: 1, y: 0, rotate: [0, 360] }}
                 transition={{ duration: 1 }}
