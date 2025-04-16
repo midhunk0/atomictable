@@ -1,5 +1,6 @@
 .app.day {
     --bg-color: #F4F7ED;
+    --bg-secondary-color: #E9ECE3;
     --text-color: #1E2022;
     --red: #C94C4C;
     --blue: #3A7CA5;
@@ -9,9 +10,14 @@
   
 .app.night {
     --bg-color: #1E2022;
+    --bg-secondary-color: #2C2F31;
     --text-color: #F4F7ED;
     --red: #FF6B6B;
     --blue: #4D96FF;
     --green: #6EEB83;
     --yellow: #F2C94C; 
+}
+
+sup{
+    font-size: x-small;
 }
