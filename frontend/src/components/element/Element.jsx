@@ -18,15 +18,12 @@ export default function Element() {
         return ()=>window.removeEventListener("resize", handleResize);
     }, []);
 
-    // const unique=[...new Set(data.elements.map(element=>element["cpk-hex"]))];
-    // console.log(unique);
-
-    function renderElectronConfig(config) {
-        const parts = config.split(' ').map((part, index) => {
-            const match = part.match(/^(\d)([spdf])(\d+)$/);
-            if (match) {
-                const [, n, l, p] = match;
-                return (
+    function renderElectronConfig(config){
+        const parts=config.split(' ').map((part, index)=>{
+            const match=part.match(/^(\d)([spdf])(\d+)$/);
+            if(match){
+                const [, n, l, p]=match;
+                return(
                     <span key={index}>
                         {n}{l}<sup>{p}</sup>&nbsp;
                     </span>
@@ -34,12 +31,10 @@ export default function Element() {
             }
             return <span key={index}>{part}&nbsp;</span>;
         });
-    
         return <span className="box">{parts}</span>;
     }
-    
 
-    return (
+    return(
         <div className="element">
             <div className="element-header">
                 {prevElement ? 
@@ -70,25 +65,24 @@ export default function Element() {
 
                 <div className="element-info-panel">
                     <div className="element-first-row">
-
-                    <div className="element-card">
-                        <div className="element-card-row">
-                            <p>{element.number}</p>
-                            <p>{element.phase}</p>
+                        <div className="element-card">
+                            <div className="element-card-row">
+                                <p>{element.number}</p>
+                                <p>{element.phase}</p>
+                            </div>
+                            <div className="element-card-row1">
+                                <p className="symbol">{element.symbol}</p>
+                                <p>{element.name}</p>
+                            </div>
+                            <div className="element-card-row">
+                                <p className="category">{element.category}</p>
+                                <p className={`block ${element.block}`}>{element.block}</p>
+                            </div>
                         </div>
-                        <div className="element-card-row1">
-                            <p className="symbol">{element.symbol}</p>
-                            <p>{element.name}</p>
+                        <div className="element-image-section">
+                            <img src={element.image.url} alt={element.name} />
+                            <p>{element.image.title}</p>
                         </div>
-                        <div className="element-card-row">
-                            <p className="category">{element.category}</p>
-                            <p className={`block ${element.block}`}>{element.block}</p>
-                        </div>
-                    </div>
-                    <div className="element-image-section">
-                        <img src={element.image.url} alt={element.name} />
-                        <p>{element.image.title}</p>
-                    </div>
                     </div>
 
                     <div className="element-summary">

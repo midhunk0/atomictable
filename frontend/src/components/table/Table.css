@@ -5,14 +5,14 @@
     justify-content: center;
     gap: 4px;
     height: calc(100vh - 79px - 40px);
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg);
+    color: var(--text);
     padding: 20px;
     overflow-x: scroll;
     overflow-y: scroll;
     max-width: 100%;
 }
-  
+
 .table-row{
     display: flex;
     gap: 4px;
@@ -21,8 +21,8 @@
 .table-element{
     display: flex;
     padding: 10px;
-    border: 1px solid var(--text-color);
-    background-color: var(--bg-secondary-color);
+    border: 1px solid var(--bg-secondary);
+    background-color: var(--bg);
     align-items: center;
     justify-content: center;
     width: 36px;
@@ -39,7 +39,7 @@
     padding: 6px;
     width: 44px;
     aspect-ratio: 1;
-    border: 1px solid var(--text-color);
+    border: 1px solid var(--bg-secondary);
     border-radius: 4px;
     position: relative;
     cursor: pointer;
@@ -58,13 +58,13 @@
 }
 
 .table-element.undefined{
-    border: 1px solid var(--bg-color);
-    background-color: var(--bg-color);
+    border: 1px solid var(--bg);
+    background-color: var(--bg);
     cursor: auto;
     z-index: -4;
 }
 
-.table-element:hover span {
+.table-element:hover span{
     top: 0;
     right: 0;
     width: 100%;
@@ -72,11 +72,11 @@
     border-radius: 2px;
 }
 
-.table-element-symbol, .table-element-number {
+.table-element-symbol, .table-element-number{
     z-index: 1;
 }
   
-.table-element::before {
+.table-element::before{
     content: "";
     position: absolute;
     top: 4px;
@@ -84,33 +84,38 @@
     width: 4px;
     height: 4px;
     border-radius: 50%;
-    transition: all 0.6s ease-in-out, border-radius 0.4s ease-in-out;
+    transition: all 0.4s ease-in-out;
     z-index: 0;
     opacity: 0.5;
 }
   
-.table-element.s::before {
+.table-element.s::before{
     background-color: var(--red);
 }
 
-.table-element.p::before {
+.table-element.p::before{
     background-color: var(--green);
 }
 
-.table-element.d::before {
+.table-element.d::before{
     background-color: var(--blue);
 }
 
-.table-element.f::before {
+.table-element.f::before{
     background-color: var(--yellow);
 }  
 
-.table-element:hover::before {
+.table-element:hover::before{
     scale: 35;
 }
 
-.table-element.hover::before {
+.table-element.hover::before{
     scale: 35;
+}
+
+.table-element.active{
+    border: 1px solid var(--text);
+    background-color: var(--bg-secondary);
 }
 
 @media(max-width: 1147px){

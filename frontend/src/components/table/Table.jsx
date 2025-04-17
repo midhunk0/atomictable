@@ -4,9 +4,10 @@ import data from "../../data.json";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loader/Loader";
 
-export default function Table(){
+export default function Table({ option }){
     const navigate=useNavigate();
     const elements=data.elements;
+    const [showElements, setShowElements]=useState(elements);
     const [loading, setLoading]=useState(true);
     const [hover, setHover]=useState("");
 
@@ -14,13 +15,24 @@ export default function Table(){
         const timer=setTimeout(()=>setLoading(false), 2000);
         return ()=>clearTimeout(timer);
     }, []);
-
+    
+    useEffect(()=>{
+        const data=option.value==="all" ? 
+            elements : [...elements.filter((element)=>
+                element.block===option.value || 
+                element.phase===option.value || 
+                element.category===option.value
+            )];
+        setShowElements(data);
+    }, [elements, option]);
+    
     if(loading){
         return <Loader/>
     }
 
     return(
         <div className="table">
+            <h1>{option.name}</h1>
             {Array.from({ length: 10 }, (_, rowIndex)=>(
                 <div className="table-row" key={rowIndex}>
                 {Array.from({ length: 18 }, (_, colIndex)=>{
@@ -40,7 +52,14 @@ export default function Table(){
                         )
                     }
                     return(
-                        <div className={`table-element ${element?.block} ${hover===element?.category ? "hover" : ""}`} key={colIndex} onClick={()=>element && navigate(`/element/${element?.number}`)}>
+                        <div 
+                            className={`table-element 
+                                ${element?.block} ${hover===element?.category ? "hover" : ""} 
+                                ${showElements.find((showElement)=>showElement?.number===element?.number) ? "active" : ""}
+                            `} 
+                            key={colIndex} 
+                            onClick={()=>element && navigate(`/element/${element?.number}`)}
+                        >
                             <p className="table-element-number">{element?.number}</p>
                             <p className="table-element-symbol">{element?.symbol}</p>
                         </div>

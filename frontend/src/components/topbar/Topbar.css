@@ -3,8 +3,9 @@
     gap: 10px;
     align-items: center;
     padding: 20px;
-    background-color: var(--bg-color);
-    color: var(--text-color);
+    background-color: var(--bg);
+    color: var(--text);
+    position: relative;
 }
 
 .logo{
@@ -26,4 +27,46 @@
 
 .app.night .logo{
     content: url("/logo-white.png");
+}
+
+.app.night .menu{
+    content: url("/menu-white.png");
+}
+
+.app.night .close{
+    content: url("/close-white.png");
+}
+
+.topbar-menu{
+    display: flex;
+}
+
+.topbar-options{
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    border: 1px solid var(--text);
+    border-radius: 4px;
+    background-color: var(--bg-secondary);
+    right: 20px;
+    top: 60px;
+    gap: 4px;
+    z-index: 4;
+    padding: 4px;
+    height: 298px;
+    overflow: scroll;
+}
+
+.topbar-options p{
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    border-radius: 2px;
+    background-color: var(--bg);
+    border: 1px solid var(--text);
+}
+
+.topbar-options p:hover{
+    background-color: var(--text);
+    color: var(--bg);
 }
