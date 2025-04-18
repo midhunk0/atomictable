@@ -23,3 +23,12 @@
 sup{
     font-size: x-small;
 }
+
+.toast{
+    background-color: var(--bg-secondary);
+    color: var(--text-secondary);
+    border: 1px solid var(--text);
+    border-radius: 4px;
+    margin-bottom: 5px;
+    margin-right: 4px;
+}

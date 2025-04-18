@@ -4,13 +4,13 @@ import { useLocation, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Topbar({ mode, setMode, setOption }){
+export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOption }){
     const navigate=useNavigate();
     const location=useLocation();
-    const home=location.pathname==="/";
+    const current=location.pathname;
     const [open, setOpen]=useState(false);
 
-    const options=[
+    const filterOptions=[
         { value: "all", name: "All Elements" },
         { value: "s", name: "s-Block Elements" },
         { value: "p", name: "p-Block Elements" },
@@ -31,6 +31,16 @@ export default function Topbar({ mode, setMode, setOption }){
         { value: "actinide", name: "Actinides" },
     ];
 
+    const analysisOptions=[
+        { value: "electronegativity_pauling", name: "Electronegativity" },
+        { value: "electron_affinity", name: "Electron Affinity" },
+        { value: "atomic_mass", name: "Atomic mass" },
+        { value: "boil", name: "Boiling point" },
+        { value: "melt", name: "Melting point" },
+        { value: "density", name: "Density" },
+        { value: "molar_heat", name: "Molar heat" },
+    ]
+
     return(
         <div className="topbar">
             <motion.img
@@ -47,7 +57,7 @@ export default function Topbar({ mode, setMode, setOption }){
             :
                 <img className="icon" src="/night.png" alt="night" onClick={()=>setMode("day")}/>
             }
-            {home && 
+            {current==="/" && 
                 <div className="topbar-menu">
                     <img
                         className={`icon ${open ? "close" : "menu"}`}
@@ -64,8 +74,8 @@ export default function Topbar({ mode, setMode, setOption }){
                                 exit={{ scale: 0, opacity: 0 }}
                                 transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
                             >
-                                {options.map((option, index)=>(
-                                    <p key={index} onClick={()=>{setOption(option); setOpen(false)}}>
+                                {filterOptions.map((option, index)=>(
+                                    <p key={index} onClick={()=>{setFilterOption(option); setOpen(false)}}>
                                         {option.name}
                                     </p>
                                 ))}
@@ -73,6 +83,36 @@ export default function Topbar({ mode, setMode, setOption }){
                         )}
                     </AnimatePresence>
                 </div>
+            }
+            {current==="/analysis" && 
+                <div className="topbar-menu">
+                    <img
+                        className={`icon ${open ? "close" : "menu"}`}
+                        src={`${open ? "/close.png" : "/menu.png"}`}
+                        alt="menu"
+                        onClick={()=>setOpen((prev)=>!prev)}
+                    />
+                    <AnimatePresence>
+                        {open && (
+                            <motion.div
+                                className="topbar-options"
+                                initial={{ scale: 0, opacity: 0, originX: 1, originY: 0 }}
+                                animate={{ scale: 1, opacity: 1 }}
+                                exit={{ scale: 0, opacity: 0 }}
+                                transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+                            >
+                                {analysisOptions.map((option, index)=>(
+                                    <p key={index} onClick={()=>{setAnalysisOption(option); setOpen(false)}}>
+                                        {option.name}
+                                    </p>
+                                ))}
+                            </motion.div>
+                        )}
+                    </AnimatePresence>
+                </div>
+            }
+            {current!=="/analysis" && 
+                <img src="/graph.png" alt="graph" className="icon graph" onClick={()=>navigate("/analysis")}/>
             }
         </div>
     );

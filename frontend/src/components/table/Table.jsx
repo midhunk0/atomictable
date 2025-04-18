@@ -4,7 +4,7 @@ import data from "../../data.json";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loader/Loader";
 
-export default function Table({ option }){
+export default function Table({ filterOption }){
     const navigate=useNavigate();
     const elements=data.elements;
     const [showElements, setShowElements]=useState(elements);
@@ -17,14 +17,14 @@ export default function Table({ option }){
     }, []);
     
     useEffect(()=>{
-        const data=option.value==="all" ? 
+        const data=filterOption.value==="all" ? 
             elements : [...elements.filter((element)=>
-                element.block===option.value || 
-                element.phase===option.value || 
-                element.category===option.value
+                element.block===filterOption.value || 
+                element.phase===filterOption.value || 
+                element.category===filterOption.value
             )];
         setShowElements(data);
-    }, [elements, option]);
+    }, [elements, filterOption]);
     
     if(loading){
         return <Loader/>
@@ -32,7 +32,7 @@ export default function Table({ option }){
 
     return(
         <div className="table">
-            <h1>{option.name}</h1>
+            <h1>{filterOption.name}</h1>
             {Array.from({ length: 10 }, (_, rowIndex)=>(
                 <div className="table-row" key={rowIndex}>
                 {Array.from({ length: 18 }, (_, colIndex)=>{

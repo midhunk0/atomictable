@@ -150,18 +150,13 @@ model-viewer{
     padding: 20px;
     gap: 20px;
 }
-  
+
 .element-image-section img{
-    height: max(250px, auto);
-    width: min(250px, 50%);
+    height: max(200px, auto);
+    width: min(200px, 50%);
     border-radius: 3px;
     object-fit: contain;
-    background-color: var(--bg);
-}
-
-.element-summary{
-    padding: 20px;
-    border-left: 4px solid var(--text);
+    background-color: var(--bg-secondary);
 }
 
 .element-summary{
@@ -182,10 +177,32 @@ model-viewer{
     line-height: 1.6;
 }
 
+.element-summary-buttons{
+    display: flex;
+    margin-top: 10px;
+    gap: 16px;
+}
+
+.element-summary-buttons button, .element-card-div button{
+    display: flex;
+    padding: 0;
+    border: none;
+    outline: none;
+    background-color: var(--bg-secondary);
+}
+
+.app.night .audio{
+    content: url("/audio-white.png");
+}
+
+.app.night .copy{
+    content: url("/copy-white.png");
+}
+
 .element-info-card{
     display: flex;
     flex-direction: column;
-    gap: 12px;
+    gap: 16px;
     padding: 20px;
     border-radius: 4px;
     border: 1px solid var(--text);
@@ -221,6 +238,15 @@ model-viewer{
     overflow: auto;
     background-color: var(--bg);
     position: absolute;
+    align-items: center;
+}
+
+.box{
+    justify-content: space-between;
+}
+
+.element-card-div button{
+    background-color: var(--bg);
 }
 
 @media(max-width: 1080px){

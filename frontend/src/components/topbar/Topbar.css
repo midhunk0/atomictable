@@ -1,6 +1,6 @@
 .topbar{
     display: flex;
-    gap: 10px;
+    gap: 16px;
     align-items: center;
     padding: 20px;
     background-color: var(--bg);
@@ -35,6 +35,10 @@
 
 .app.night .close{
     content: url("/close-white.png");
+}
+
+.app.night .graph{
+    content: url("/graph-white.png");
 }
 
 .topbar-menu{

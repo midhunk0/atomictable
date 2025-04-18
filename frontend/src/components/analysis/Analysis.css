@@ -1,0 +1,10 @@
+.analysis{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    width: calc(100% - 40px);
+    height: calc(100% - 40px - 79px);
+    background-color: var(--bg);
+    color: var(--text);
+}
+
