@@ -9,6 +9,7 @@ import Analysis from "./components/analysis/Analysis";
 
 function App(){
     const [mode, setMode]=useState(localStorage.getItem("mode") || "day");
+    const [element, setElement]=useState(null);
     const [filterOption, setFilterOption]=useState(()=>{
         const option=localStorage.getItem("filterOption");
         return option ? JSON.parse(option) : {value: "all",name: "All Elements"}
@@ -54,9 +55,9 @@ function App(){
     return (
         <div className={`app ${mode}`}>
             <Router>
-                <Topbar mode={mode} setMode={setMode} setFilterOption={setFilterOption} setAnalysisOption={setAnalysisOption}/>
+                <Topbar mode={mode} setMode={setMode} setFilterOption={setFilterOption} setAnalysisOption={setAnalysisOption} setElement={setElement}/>
                 <Routes>
-                    <Route path="/" element={<Table filterOption={filterOption}/>}/>
+                    <Route path="/" element={<Table filterOption={filterOption} selectedElement={element}/>}/>
                     <Route path="/element/:number" element={<Element/>}/>
                     <Route path="/analysis" element={<Analysis mode={mode} analysisOption={analysisOption}/>}/>
                 </Routes>

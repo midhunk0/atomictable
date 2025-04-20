@@ -37,8 +37,8 @@
     content: url("/next-white.png");
 }
 
-.element-name {
-    font-size: 32px;
+.app.night .check{
+    content: url("/check-white.png");
 }
 
 .element-container{
@@ -46,7 +46,7 @@
     gap: 20px;
     padding: 20px;
     flex-wrap: wrap;
-    height: calc(100vh - 159px);
+    height: calc(100vh - 79px - 32px - 48px);
 }
 
 model-viewer{
@@ -67,7 +67,7 @@ model-viewer{
     flex-direction: column;
     gap: 20px;
     overflow-y: auto;
-    max-height: calc(100vh - 159px);
+    height: calc(100vh - 79px - 32px - 48px);
     width: 50%;
 }
 

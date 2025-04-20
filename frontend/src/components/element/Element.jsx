@@ -12,6 +12,7 @@ export default function Element() {
     const element=data.elements[number-1];
     const nextElement=data.elements[number];
     const [width, setWidth]=useState(window.innerWidth);
+    const [copied, setCopied]=useState(null);
 
     useEffect(()=>{
         const handleResize=()=>setWidth(window.innerWidth);
@@ -44,10 +45,68 @@ export default function Element() {
         synth.speak(utterence);
     };
 
-    const handleCopy=(text)=>{
+    const handleCopy=(text, fieldId)=>{
         navigator.clipboard.writeText(text)
-        .then(()=>toast.success("Copied to clipboard"))
+        .then(()=>{
+            toast.success("Copied to clipboard");
+            setCopied(fieldId);
+            setTimeout(()=>setCopied(null), 1500);
+        })
         .catch((err)=>console.error(err));
+    }
+
+    const PropertyBox=({ property, name })=>{
+        return(element[property] && 
+            <div className="element-card-div">
+                <p>{name}</p>
+                <span className="box">
+                    {element[property]}
+                    <button onClick={()=>handleCopy(element[property], property)}>
+                        <img 
+                            className={`icon ${copied===property ? "check" : "copy"}`} 
+                            src={copied===property ? "/check.png" : "/copy.png"} 
+                            alt={copied===property ? "check" : "copy"}
+                        />
+                    </button>
+                </span>
+            </div>
+        )
+    }
+
+    const Configuration=({ config, name })=>{
+        return(element[config] && 
+            <div className="element-card-div">
+                <p>{name}</p>
+                <span className="box">
+                    {renderElectronConfig(element[config])}
+                    <button onClick={()=>handleCopy(element[config], config)}>
+                        <img 
+                            className={`icon ${copied===config ? "check" : "copy"}`} 
+                            src={copied===config ? "/check.png" : "/copy.png"} 
+                            alt={copied===config ? "check" : "copy"}
+                        />
+                    </button>
+                </span>
+            </div>
+        )
+    }
+
+    const ShellConfiguration=()=>{
+        return(element.shells && 
+            <div className="element-card-div">
+                <p>Shell Config</p>
+                <span className="box">
+                    {element.shells?.join(", ")}
+                    <button onClick={()=>handleCopy(element.shells?.join(", "), "shell")}>
+                        <img 
+                            className={`icon ${copied==="shell" ? "check" : "copy"}`} 
+                            src={copied==="shell" ? "/check.png" : "/copy.png"} 
+                            alt="copy"
+                        />
+                    </button>
+                </span>
+            </div>
+        )
     }
 
     return(
@@ -107,152 +166,36 @@ export default function Element() {
                             <button onClick={()=>speakText(element.summary)}>
                                 <img className="icon audio" src="/audio.png" alt="audio"/>
                             </button>
-                            <button onClick={()=>handleCopy(element.summary)}>
-                                <img className="icon copy" src="/copy.png" alt="copy"/>
+                            <button onClick={()=>handleCopy(element.summary, "summary")}>
+                                <img 
+                                    className={`icon ${copied==="summary" ? "check" : "copy"}`} 
+                                    src={copied==="summary" ? "/check.png" : "/copy.png"} 
+                                    alt="copy"
+                                />
                             </button>
                         </div>
                     </div>
                     <div className="element-info-card">
                         <h2>Electron Details</h2>
-                        {element.shells && 
-                            <div className="element-card-div">
-                                <p>Shell Config</p>
-                                <span className="box">
-                                    {element.shells?.join(", ")}
-                                    <button onClick={()=>handleCopy(element.shells?.join(", "))}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.electron_configuration && 
-                            <div className="element-card-div">
-                                <p>Electron Config</p>
-                                <span className="box">
-                                    {renderElectronConfig(element.electron_configuration)}
-                                    <button onClick={()=>handleCopy(element.electron_configuration)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.electron_configuration_semantic && 
-                            <div className="element-card-div">
-                                <p>Semantic Config</p>
-                                <span className="box">
-                                    {renderElectronConfig(element.electron_configuration_semantic)}
-                                    <button onClick={()=>handleCopy(element.electron_configuration_semantic)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.electronegativity_pauling && 
-                            <div className="element-card-div">
-                                <p>Electronegativity</p>
-                                <span className="box">
-                                    {element.electronegativity_pauling}
-                                    <button onClick={()=>handleCopy(element.electronegativity_pauling)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.electron_affinity && 
-                            <div className="element-card-div">
-                                <p>Electron Affinity</p>
-                                <span className="box">
-                                    {element.electron_affinity}
-                                    <button onClick={()=>handleCopy(element.electron_affinity)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
+                        <ShellConfiguration/>
+                        <Configuration config="electron_configuration" name="Electronic Config"/>
+                        <Configuration config="electron_configuration_semantic" name="Semantic Config"/>
+                        <PropertyBox property="electronegativity_pauling" name="Electronegativity"/>
+                        <PropertyBox property="electron_affinity" name="Electron Affinity"/>
                     </div>
                     <div className="element-info-card">
                         <h2>Discovery</h2>
-                        {element.discovered_by && 
-                            <div className="element-card-div">
-                                <p>Discovered by</p>
-                                <span className="box">
-                                    {element.discovered_by}
-                                    <button onClick={()=>handleCopy(element.discovered_by)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.named_by && 
-                            <div className="element-card-div">
-                                <p>Named by</p>
-                                <span className="box">
-                                    {element.named_by}
-                                    <button onClick={()=>handleCopy(element.named_by)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
+                        <PropertyBox property="discovered_by" name="Discovered by"/>
+                        <PropertyBox property="named_by" name="Named by"/>
                         {element.source && <a href={element.source} target="_blank" rel="noreferrer">More Info</a>}
                     </div>
                     <div className="element-info-card">
                         <h2>Structure</h2>
-                        {element.atomic_mass && 
-                            <div className="element-card-div">
-                                <p>Atomic Mass</p>
-                                <span className="box">
-                                    {element.atomic_mass}
-                                    <button onClick={()=>handleCopy(element.atomic_mass)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.boil && 
-                            <div className="element-card-div">
-                                <p>Boiling Point</p>
-                                <span className="box">
-                                    {element.boil}
-                                    <button onClick={()=>handleCopy(element.boil)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.melt && 
-                            <div className="element-card-div">
-                                <p>Melting Point</p>
-                                <span className="box">
-                                    {element.melt}
-                                    <button onClick={()=>handleCopy(element.melt)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.density && 
-                            <div className="element-card-div">
-                                <p>Density</p>
-                                <span className="box">
-                                    {element.density}
-                                    <button onClick={()=>handleCopy(element.density)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
-                        {element.molar_heat && 
-                            <div className="element-card-div">
-                                <p>Molar Heat</p>
-                                <span className="box">
-                                    {element.molar_heat}
-                                    <button onClick={()=>handleCopy(element.molar_heat)}>
-                                        <img className="icon copy" src="/copy.png" alt="copy"/>
-                                    </button>
-                                </span>
-                            </div>
-                        }
+                        <PropertyBox property="atomic_mass" name="Atomic Mass"/>
+                        <PropertyBox property="boil" name="Boiling Point"/>
+                        <PropertyBox property="melt" name="Melting Point"/>
+                        <PropertyBox property="density" name="Density"/>
+                        <PropertyBox property="molar_heat" name="Molar Heat"/>
                     </div>
                 </div>
             </div>

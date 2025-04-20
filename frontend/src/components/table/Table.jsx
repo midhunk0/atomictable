@@ -1,10 +1,11 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from "react";
 import "./Table.css";
 import data from "../../data.json";
 import { useNavigate } from "react-router-dom";
 import Loader from "../loader/Loader";
 
-export default function Table({ filterOption }){
+export default function Table({ filterOption, selectedElement }){
     const navigate=useNavigate();
     const elements=data.elements;
     const [showElements, setShowElements]=useState(elements);
@@ -16,15 +17,37 @@ export default function Table({ filterOption }){
         return ()=>clearTimeout(timer);
     }, []);
     
+    // useEffect(()=>{
+    //     const data=filterOption.value==="all" ? 
+    //         elements : [...elements.filter((element)=>
+    //             element.block===filterOption.value || 
+    //             element.phase===filterOption.value || 
+    //             element.category===filterOption.value
+    //         )];
+    //     setShowElements(data);
+    // }, [elements, filterOption]);
+
     useEffect(()=>{
-        const data=filterOption.value==="all" ? 
-            elements : [...elements.filter((element)=>
-                element.block===filterOption.value || 
-                element.phase===filterOption.value || 
+        let filtered=elements;
+    
+        if(filterOption.value!=="all"){
+            filtered=elements.filter((element)=>
+                element.block===filterOption.value ||
+                element.phase===filterOption.value ||
                 element.category===filterOption.value
-            )];
-        setShowElements(data);
-    }, [elements, filterOption]);
+            );
+        }
+    
+        if(selectedElement){
+            filtered=filtered.filter((element)=>
+                element.name.toLowerCase().includes(selectedElement.toLowerCase()) ||
+                element.symbol.toLowerCase().includes(selectedElement.toLowerCase())
+            );
+        }
+    
+        setShowElements(filtered);
+    }, [filterOption, selectedElement]);
+    
     
     if(loading){
         return <Loader/>
@@ -32,7 +55,10 @@ export default function Table({ filterOption }){
 
     return(
         <div className="table">
-            <h1>{filterOption.name}</h1>
+            <div className="table-header">
+                <h1>{filterOption.name}</h1>
+            </div>
+            <div className="table-container">
             {Array.from({ length: 10 }, (_, rowIndex)=>(
                 <div className="table-row" key={rowIndex}>
                 {Array.from({ length: 18 }, (_, colIndex)=>{
@@ -56,6 +82,7 @@ export default function Table({ filterOption }){
                             className={`table-element 
                                 ${element?.block} ${hover===element?.category ? "hover" : ""} 
                                 ${showElements.find((showElement)=>showElement?.number===element?.number) ? "active" : ""}
+                                ${selectedElement && element?.name.toLowerCase().includes(selectedElement) ? "active" : ""}
                             `} 
                             key={colIndex} 
                             onClick={()=>element && navigate(`/element/${element?.number}`)}
@@ -67,6 +94,7 @@ export default function Table({ filterOption }){
                 })}
                 </div>
             ))}
+            </div>
         </div>
     )
 }

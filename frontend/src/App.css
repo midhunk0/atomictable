@@ -1,3 +1,10 @@
+*{
+    padding: 0;
+    margin: 0;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    scrollbar-width: none;
+}
+
 .app.day{
     --bg: #F4F7ED;
     --bg-secondary: #E9ECE3;
@@ -31,4 +38,18 @@ sup{
     border-radius: 4px;
     margin-bottom: 5px;
     margin-right: 4px;
+}
+
+h1{
+    font-family: Oswald;
+    font-size: 40px;
+    line-height: 1;
+}
+
+h2{
+    font-family: Oswald;
+}
+
+a{
+    color: var(--text);
 }

@@ -1,14 +1,23 @@
-import React, { useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import "./Topbar.css";
 import { useLocation, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOption }){
+export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOption, setElement }){
     const navigate=useNavigate();
     const location=useLocation();
+    const inputRef=useRef(null);
     const current=location.pathname;
     const [open, setOpen]=useState(false);
+    const [searchbar, setSearchbar]=useState(false);
+
+    useEffect(()=>{
+        if(searchbar && inputRef.current){
+            // @ts-ignore
+            inputRef.current.focus();
+        }
+    }, [searchbar]);
 
     const filterOptions=[
         { value: "all", name: "All Elements" },
@@ -51,11 +60,22 @@ export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOpti
                 className="logo"
                 onClick={()=>navigate("/")}
             />
-            <h1 onClick={()=>navigate("/")}>Periodic Table</h1>
+            <h2 onClick={()=>navigate("/")}>Periodic Table</h2>
+            {current==="/" && 
+                <div className="topbar-search">
+                    {searchbar && 
+                        <input ref={inputRef} type="text" className="topbar-searchbar" placeholder="enter an element" onChange={(e)=>setElement(e.target.value.toLowerCase())}/>
+                    }
+                    <img className="icon search" src="/search.png" alt="search" onClick={()=>{setSearchbar(prev=>!prev), setElement()}}/>
+                </div>
+            }
             {mode==="day" ? 
                 <img className="icon" src="/day.png" alt="day" onClick={()=>setMode("night")}/>
             :
                 <img className="icon" src="/night.png" alt="night" onClick={()=>setMode("day")}/>
+            }
+            {current!=="/analysis" && 
+                <img src="/graph.png" alt="graph" className="icon graph" onClick={()=>navigate("/analysis")}/>
             }
             {current==="/" && 
                 <div className="topbar-menu">
@@ -110,9 +130,6 @@ export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOpti
                         )}
                     </AnimatePresence>
                 </div>
-            }
-            {current!=="/analysis" && 
-                <img src="/graph.png" alt="graph" className="icon graph" onClick={()=>navigate("/analysis")}/>
             }
         </div>
     );
