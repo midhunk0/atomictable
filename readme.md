@@ -1,5 +1,7 @@
 # Periodic Table
 
+![periodic table](https://github.com/user-attachments/assets/77b30b55-628d-4b04-b9ca-01a84c59f965)
+
 This is an interactive Periodic Table web app built with React. You can explore all chemical elements, view detailed information about each one, and visualize various elemental properties through graphs.
 
 ## Features
