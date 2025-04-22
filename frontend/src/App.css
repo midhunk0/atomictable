@@ -27,6 +27,20 @@
     --yellow: #F2C94C; 
 }
 
+h1{
+    font-family: Oswald;
+    font-size: 40px;
+    line-height: 1;
+}
+
+h2{
+    font-family: Oswald;
+}
+
+a{
+    color: var(--text);
+}
+
 sup{
     font-size: x-small;
 }
@@ -40,16 +54,48 @@ sup{
     margin-right: 4px;
 }
 
-h1{
-    font-family: Oswald;
-    font-size: 40px;
-    line-height: 1;
+.icon{
+    width: 24px;   
+    aspect-ratio: 1;
+    cursor: pointer;
 }
 
-h2{
-    font-family: Oswald;
+.app.night .logo{
+    content: url("/logo-white.png");
 }
 
-a{
-    color: var(--text);
+.app.night .search{
+    content: url("/search-white.png");
+}
+
+.app.night .graph{
+    content: url("/graph-white.png");
+}
+
+.app.night .menu{
+    content: url("/menu-white.png");
+}
+
+.app.night .close{
+    content: url("/close-white.png");
+}
+
+.app.night .prev{
+    content: url("/prev-white.png");
+}
+
+.app.night .next{
+    content: url("/next-white.png");
+}
+
+.app.night .audio{
+    content: url("/audio-white.png");
+}
+
+.app.night .copy{
+    content: url("/copy-white.png");
+}
+
+.app.night .check{
+    content: url("/check-white.png");
 }

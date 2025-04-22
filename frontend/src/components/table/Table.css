@@ -1,32 +1,26 @@
 .table{
     display: flex;
     flex-direction: column;
-    max-width: 100%;
-    align-items: center;
     background-color: var(--bg);
     color: var(--text);
     padding: 20px;
+    height: calc(100vh - 119px);
     gap: 4px;
 }
 
-.table-header{
-    display: flex;
-    width: 100%;
-    justify-content: center;
+.table h1{
+    margin: 0 auto;
 }
 
 .table-container{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     gap: 4px;
-    height: calc(100vh - 79px - 84px);
     background-color: var(--bg);
     color: var(--text);
     overflow-x: scroll;
     overflow-y: scroll;
-    max-width: 100%;
 }
 
 .table-row{
@@ -36,32 +30,20 @@
   
 .table-element{
     display: flex;
+    align-items: center;
+    justify-content: center;
     padding: 10px;
     border: 1px solid var(--bg-secondary);
     background-color: var(--bg);
-    align-items: center;
-    justify-content: center;
     width: 36px;
-    aspect-ratio: 1/1;
+    aspect-ratio: 1;
     border-radius: 4px;
     cursor: pointer;
     position: relative;
     overflow: hidden;
 }
 
-.table-f{
-    display: flex;
-    align-items: center;
-    padding: 6px;
-    width: 44px;
-    aspect-ratio: 1;
-    border: 1px solid var(--bg-secondary);
-    border-radius: 4px;
-    position: relative;
-    cursor: pointer;
-}
-
-.table-element-number, .table-f-number{
+.table-element-number{
     font-size: 10px;
     position: absolute;
     top: 4px;
@@ -101,7 +83,6 @@
     height: 4px;
     border-radius: 50%;
     transition: all 0.4s ease-in-out;
-    z-index: 0;
     opacity: 0.5;
 }
   
@@ -137,6 +118,5 @@
 @media(max-width: 1147px){
     .table-container{
         align-items: flex-start;  
-        justify-content: flex-start;  
     }
 }

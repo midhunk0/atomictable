@@ -9,6 +9,7 @@ export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOpti
     const location=useLocation();
     const inputRef=useRef(null);
     const current=location.pathname;
+    
     const [open, setOpen]=useState(false);
     const [searchbar, setSearchbar]=useState(false);
 
@@ -60,77 +61,79 @@ export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOpti
                 className="logo"
                 onClick={()=>navigate("/")}
             />
-            <h2 onClick={()=>navigate("/")}>Periodic Table</h2>
-            {current==="/" && 
-                <div className="topbar-search">
-                    {searchbar && 
-                        <input ref={inputRef} type="text" className="topbar-searchbar" placeholder="enter an element" onChange={(e)=>setElement(e.target.value.toLowerCase())}/>
-                    }
-                    <img className="icon search" src="/search.png" alt="search" onClick={()=>{setSearchbar(prev=>!prev), setElement()}}/>
-                </div>
-            }
-            {mode==="day" ? 
-                <img className="icon" src="/day.png" alt="day" onClick={()=>setMode("night")}/>
-            :
-                <img className="icon" src="/night.png" alt="night" onClick={()=>setMode("day")}/>
-            }
-            {current!=="/analysis" && 
-                <img src="/graph.png" alt="graph" className="icon graph" onClick={()=>navigate("/analysis")}/>
-            }
-            {current==="/" && 
-                <div className="topbar-menu">
-                    <img
-                        className={`icon ${open ? "close" : "menu"}`}
-                        src={`${open ? "/close.png" : "/menu.png"}`}
-                        alt="menu"
-                        onClick={()=>setOpen((prev)=>!prev)}
-                    />
-                    <AnimatePresence>
-                        {open && (
-                            <motion.div
-                                className="topbar-options"
-                                initial={{ scale: 0, opacity: 0, originX: 1, originY: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                exit={{ scale: 0, opacity: 0 }}
-                                transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-                            >
-                                {filterOptions.map((option, index)=>(
-                                    <p key={index} onClick={()=>{setFilterOption(option); setOpen(false)}}>
-                                        {option.name}
-                                    </p>
-                                ))}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            }
-            {current==="/analysis" && 
-                <div className="topbar-menu">
-                    <img
-                        className={`icon ${open ? "close" : "menu"}`}
-                        src={`${open ? "/close.png" : "/menu.png"}`}
-                        alt="menu"
-                        onClick={()=>setOpen((prev)=>!prev)}
-                    />
-                    <AnimatePresence>
-                        {open && (
-                            <motion.div
-                                className="topbar-options"
-                                initial={{ scale: 0, opacity: 0, originX: 1, originY: 0 }}
-                                animate={{ scale: 1, opacity: 1 }}
-                                exit={{ scale: 0, opacity: 0 }}
-                                transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
-                            >
-                                {analysisOptions.map((option, index)=>(
-                                    <p key={index} onClick={()=>{setAnalysisOption(option); setOpen(false)}}>
-                                        {option.name}
-                                    </p>
-                                ))}
-                            </motion.div>
-                        )}
-                    </AnimatePresence>
-                </div>
-            }
+            <h2 onClick={()=>navigate("/")}>Atomic Table</h2>
+            <div className="topbar-buttons">
+                {current==="/" && 
+                    <div className="topbar-search">
+                        {searchbar && 
+                            <input ref={inputRef} type="text" placeholder="enter an element" onChange={(e)=>setElement(e.target.value.toLowerCase())}/>
+                        }
+                        <img className="icon search" src="/search.png" alt="search" onClick={()=>{setSearchbar(prev=>!prev), setElement()}}/>
+                    </div>
+                }
+                {mode==="day" ? 
+                    <img className="icon" src="/day.png" alt="day" onClick={()=>setMode("night")}/>
+                :
+                    <img className="icon" src="/night.png" alt="night" onClick={()=>setMode("day")}/>
+                }
+                {current!=="/analysis" && 
+                    <img src="/graph.png" alt="graph" className="icon graph" onClick={()=>navigate("/analysis")}/>
+                }
+                {current==="/" && 
+                    <div className="topbar-menu">
+                        <img
+                            className={`icon ${open ? "close" : "menu"}`}
+                            src={`${open ? "/close.png" : "/menu.png"}`}
+                            alt="menu"
+                            onClick={()=>setOpen((prev)=>!prev)}
+                        />
+                        <AnimatePresence>
+                            {open && (
+                                <motion.div
+                                    className="topbar-options"
+                                    initial={{ scale: 0, opacity: 0, originX: 1, originY: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0, opacity: 0 }}
+                                    transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+                                >
+                                    {filterOptions.map((option, index)=>(
+                                        <p key={index} onClick={()=>{setFilterOption(option); setOpen(false)}}>
+                                            {option.name}
+                                        </p>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                }
+                {current==="/analysis" && 
+                    <div className="topbar-menu">
+                        <img
+                            className={`icon ${open ? "close" : "menu"}`}
+                            src={`${open ? "/close.png" : "/menu.png"}`}
+                            alt="menu"
+                            onClick={()=>setOpen((prev)=>!prev)}
+                        />
+                        <AnimatePresence>
+                            {open && (
+                                <motion.div
+                                    className="topbar-options"
+                                    initial={{ scale: 0, opacity: 0, originX: 1, originY: 0 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0, opacity: 0 }}
+                                    transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+                                >
+                                    {analysisOptions.map((option, index)=>(
+                                        <p key={index} onClick={()=>{setAnalysisOption(option); setOpen(false)}}>
+                                            {option.name}
+                                        </p>
+                                    ))}
+                                </motion.div>
+                            )}
+                        </AnimatePresence>
+                    </div>
+                }
+            </div>
         </div>
     );
 }

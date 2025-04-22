@@ -59,7 +59,7 @@ export default function Element() {
         return(element[property] && 
             <div className="element-card-div">
                 <p>{name}</p>
-                <span className="box">
+                <span className="element-property-box">
                     {element[property]}
                     <button onClick={()=>handleCopy(element[property], property)}>
                         <img 
@@ -77,7 +77,7 @@ export default function Element() {
         return(element[config] && 
             <div className="element-card-div">
                 <p>{name}</p>
-                <span className="box">
+                <span className="element-property-box">
                     {renderElectronConfig(element[config])}
                     <button onClick={()=>handleCopy(element[config], config)}>
                         <img 
@@ -95,7 +95,7 @@ export default function Element() {
         return(element.shells && 
             <div className="element-card-div">
                 <p>Shell Config</p>
-                <span className="box">
+                <span className="element-property-box">
                     {element.shells?.join(", ")}
                     <button onClick={()=>handleCopy(element.shells?.join(", "), "shell")}>
                         <img 
@@ -114,15 +114,15 @@ export default function Element() {
             <div className="element-header">
                 {prevElement ? 
                     <button onClick={()=>navigate(`/element/${number-1}`)}>
-                        <img className="prev" src="/prev.png" alt="previous"/>
+                        <img className="icon prev" src="/prev.png" alt="previous"/>
                         {width<600 ? prevElement.symbol : prevElement.name}
                     </button>
                 : <div/>}
-                <h1 className="element-name">{element.name} ({element.symbol})</h1>
+                <h1>{element.name} ({element.symbol})</h1>
                 {nextElement ? 
                     <button onClick={()=>navigate(`/element/${number+1}`)}>
                         {width<600 ? nextElement.symbol : nextElement.name}
-                        <img className="next" src="/next.png" alt="next"/>
+                        <img className="icon next" src="/next.png" alt="next"/>
                     </button>
                 : <div/>}
             </div>
@@ -145,7 +145,7 @@ export default function Element() {
                                 <p>{element.number}</p>
                                 <p>{element.phase}</p>
                             </div>
-                            <div className="element-card-row1">
+                            <div className="element-card-middle-row">
                                 <p className="symbol">{element.symbol}</p>
                                 <p>{element.name}</p>
                             </div>
