@@ -1,6 +1,6 @@
-# Periodic Table
+# Atomic Table
 
-![periodic table](https://github.com/user-attachments/assets/77b30b55-628d-4b04-b9ca-01a84c59f965)
+![atomic table](https://github.com/user-attachments/assets/77b30b55-628d-4b04-b9ca-01a84c59f965)
 
 This is an interactive Periodic Table web app built with React. You can explore all chemical elements, view detailed information about each one, and visualize various elemental properties through graphs.
 
@@ -15,11 +15,11 @@ This is an interactive Periodic Table web app built with React. You can explore 
 
 1. Clone the repository:
     ```sh
-    git clone https://github.com/midhunk0/periodic-table.git
+    git clone https://github.com/midhunk0/atomictable.git
     ```
 2. Navigate to the project directory:
     ```sh
-    cd periodic-table
+    cd atomictable
     ```
 3. Install client dependencies:
     ```sh
