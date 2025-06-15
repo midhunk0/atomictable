@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./Topbar.css";
 import { useLocation, useNavigate } from "react-router-dom";
 // eslint-disable-next-line no-unused-vars
@@ -65,9 +65,20 @@ export default function Topbar({ mode, setMode, setFilterOption, setAnalysisOpti
             <div className="topbar-buttons">
                 {current==="/" && 
                     <div className="topbar-search">
-                        {searchbar && 
-                            <input ref={inputRef} type="text" placeholder="enter an element" onChange={(e)=>setElement(e.target.value.toLowerCase())}/>
-                        }
+                        <AnimatePresence>
+                            {searchbar && 
+                                <motion.input 
+                                    initial={{ scale: 0, opacity: 0, originX: 1, originY: 0.5 }}
+                                    animate={{ scale: 1, opacity: 1 }}
+                                    exit={{ scale: 0, opacity: 0 }}
+                                    transition={{ type: "tween", ease: "easeInOut", duration: 0.4 }}
+                                    ref={inputRef} 
+                                    type="text" 
+                                    placeholder="enter an element" 
+                                    onChange={(e)=>setElement(e.target.value.toLowerCase())}
+                                />
+                            }
+                        </AnimatePresence>
                         <img className="icon search" src="/search.png" alt="search" onClick={()=>{setSearchbar(prev=>!prev), setElement()}}/>
                     </div>
                 }
